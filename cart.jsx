@@ -33,9 +33,8 @@ const useDataApi = (initialUrl, initialData) => {
         const result = await axios(url);
         console.log('FETCH FROM URl');
         if (!didCancel) {
-          // result.data.data
-          // first data is from axios object, second data is from strapi object
-          dispatch({ type: 'FETCH_SUCCESS', payload: result.data.data });
+          const attributes = result.data.data.map(item => item.attributes);
+          dispatch({ type: 'FETCH_SUCCESS', payload: attributes });
         }
       } catch (error) {
         if (!didCancel) {
